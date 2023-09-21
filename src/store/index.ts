@@ -1,14 +1,12 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import * as people from "./modules/people";
+import * as favorites from "./modules/favorites";
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+const store = createStore({
   modules: {
-  }
-})
+    people: people,
+    favorites: favorites,
+  },
+});
+
+export default store;
