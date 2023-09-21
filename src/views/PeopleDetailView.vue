@@ -15,7 +15,7 @@ onMounted(async () => {
   if (match && match[1]) {
     pageNumber.value = parseInt(match[1], 10);
   }
-  console.log(pageNumber.value);
+
   await getPeople(`https://swapi.dev/api/people/${pageNumber.value}/`).then(
     (data) => {
       activePeople.value = [data as PeopleItemType];

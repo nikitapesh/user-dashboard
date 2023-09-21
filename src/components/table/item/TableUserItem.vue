@@ -2,6 +2,7 @@
 import { computed, watch } from "vue";
 import { useStore } from "vuex";
 import { type PeopleItemType } from "../../../type/PeopleItemType";
+import Button from "../../../components/ui/Button.vue";
 
 const props = defineProps<{ people: PeopleItemType }>();
 
@@ -28,15 +29,17 @@ const isPersonStored = computed(
     <td>{{ props.people.mass }}</td>
     <td>{{ props.people.hair_color }}</td>
     <td>
-      <button
+      <Button
+        type="favorite"
         v-if="!isPersonStored"
-        @click="store.dispatch('people/addToLocalStorage', props.people)"
+        @buttonClick="store.dispatch('people/addToLocalStorage', props.people)"
       >
         добавить
-      </button>
-      <button
+      </Button>
+      <Button
+        type="delete"
         v-if="isPersonStored"
-        @click="
+        @buttonClick="
           store.dispatch('people/removeFromLocalStorage', props.people.name);
           store.state.favorites.favoritePeople.splice(
             store.state.favorites.favoritePeople.indexOf(props.people),
@@ -45,7 +48,7 @@ const isPersonStored = computed(
         "
       >
         удалить
-      </button>
+      </Button>
     </td>
   </tr>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { getFilteredPeople } from "../api/index";
+import { getFilteredPeople, getPeople } from "../api/index";
 import { type PeopleListType } from "../type/PeopleListType";
 import TableList from "../components/table/TableList.vue";
 
@@ -11,10 +11,10 @@ const requestQueue = ref(Promise.resolve());
 watch(
   () => textFilter.value,
   async () => {
-    console.log(textFilter.value);
-
     requestQueue.value = requestQueue.value.then(async () => {
-      peopleListFiltered.value = await getFilteredPeople(textFilter.value);
+      peopleListFiltered.value = await getPeople(
+        `https://swapi.dev/api/people/?search=${textFilter.value}`
+      );
     });
 
     await requestQueue.value;

@@ -5,6 +5,7 @@ import { getPeople } from "../../api/index";
 import { type PeopleListType } from "../../type/PeopleListType";
 import { type PeopleItemType } from "../../type/PeopleItemType";
 import { useStore } from "vuex";
+import Button from "../../components/ui/Button.vue";
 
 const peopleList = ref<PeopleListType>({
   results: [],
@@ -74,24 +75,26 @@ watch(peopleList, () => {
     </tbody>
   </table>
   <div class="pagination">
-    <button
+    <Button
+      type="default"
       v-if="peopleList?.previous"
-      @click="
+      @buttonClick="
         loadPeople(peopleList.previous);
         isLoading = true;
       "
     >
       Назад
-    </button>
-    <button
+    </Button>
+    <Button
+      type="default"
       v-if="peopleList?.next"
-      @click="
+      @buttonClick="
         loadPeople(peopleList.next);
         isLoading = true;
       "
     >
       Вперед
-    </button>
+    </Button>
   </div>
 </template>
 
@@ -132,5 +135,11 @@ watch(peopleList, () => {
       border-right: 1px solid rgba(194, 201, 214, 0.08);
     }
   }
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
 }
 </style>
